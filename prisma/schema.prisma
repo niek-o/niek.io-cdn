@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Track {
+  id              String      @unique
+  title           String
+  subtitle        String
+  buttonColor     String
+  buttonTextColor String
+  backgroundColor String
+  iconColor       String
+  backgroundImage Boolean
+  links           TrackLink[]
+}
+
+model TrackLink {
+  id       Int           @id @default(autoincrement())
+  track    Track         @relation(fields: [trackId], references: [id])
+  trackId  String
+  url      String
+  platform MusicPlatform
+}
+
+enum MusicPlatform {
+  youtube
+  soundcloud
+  spotify
+}
+
+generator nestjsDto {
+  provider                        = "prisma-generator-nestjs-dto"
+  output                          = "../src/generated/nestjs-dto"
+  outputToNestJsResourceStructure = "false"
+  exportRelationModifierClasses   = "true"
+  reExport                        = "true"
+  createDtoPrefix                 = "Create"
+  updateDtoPrefix                 = "Update"
+  dtoSuffix                       = "Dto"
+  entityPrefix                    = ""
+  entitySuffix                    = ""
+  fileNamingStyle                 = "camel"
+}
