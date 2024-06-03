@@ -14,23 +14,24 @@ datasource db {
 }
 
 model Track {
-  id              String      @unique
+  id              String      @id @unique
   title           String
   subtitle        String
-  buttonColor     String
-  buttonTextColor String
   backgroundColor String
-  iconColor       String
+  accentColor     String
   backgroundImage Boolean
   links           TrackLink[]
+  releaseDate     DateTime
+  visible         Boolean     @default(false)
 }
 
 model TrackLink {
-  id       Int           @id @default(autoincrement())
-  track    Track         @relation(fields: [trackId], references: [id])
+  track    Track         @relation(fields: [trackId], references: [id], onDelete: Cascade)
   trackId  String
   url      String
   platform MusicPlatform
+
+  @@id([trackId, platform])
 }
 
 enum MusicPlatform {

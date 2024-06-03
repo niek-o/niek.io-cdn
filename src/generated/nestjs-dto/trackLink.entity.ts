@@ -4,8 +4,7 @@ import {Track} from './track.entity'
 
 
 export class TrackLink {
-  id: number ;
-track?: Track ;
+  track?: Track ;
 trackId: string ;
 url: string ;
 platform: MusicPlatform ;

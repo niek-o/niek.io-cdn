@@ -10,11 +10,11 @@ async function main() {
       id: "another-day",
       title: "ANOTHER DAY",
       subtitle: "NIEK & LUWUC",
-      buttonColor: "#578196",
-      buttonTextColor: "#f3d6fc",
       backgroundColor: "#1a1437",
-      iconColor: "#f1d4fa",
+      accentColor: "#f1d4fa",
       backgroundImage: false,
+      releaseDate: new Date(),
+      visible: true,
       links: {
         create: [
           {
@@ -37,11 +37,11 @@ async function main() {
       id: "hold-me-now",
       title: "HOLD ME NOW",
       subtitle: "SINGLE",
-      buttonColor: "#FF0000",
-      buttonTextColor: "#FFFFFF",
       backgroundColor: "#FFFFFF",
-      iconColor: "#FF0000",
+      accentColor: "#FF0000",
       backgroundImage: true,
+      releaseDate: new Date(),
+      visible: false,
       links: {
         create: [
           {

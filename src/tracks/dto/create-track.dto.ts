@@ -1,10 +1,12 @@
+import { TrackLinkDto } from "./track-link.dto";
+
 export class CreateTrackDto {
   id: string;
   title: string;
   subtitle: string;
-  buttonColor: string;
-  buttonTextColor: string;
   backgroundColor: string;
-  iconColor: string;
+  accentColor: string;
   backgroundImage: boolean;
+  releaseDate: Date;
+  links: TrackLinkDto[];
 }
