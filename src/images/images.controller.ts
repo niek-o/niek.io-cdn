@@ -104,6 +104,7 @@ export class ImagesController {
   }
 
   @Delete("/cache")
+  @UseGuards(ApiKeyGuard)
   invalidateCache() {
     return exec("sh invalidate_nginx_cache.sh", (error, stdout) => {
       console.log(stdout);
