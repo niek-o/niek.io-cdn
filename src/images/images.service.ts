@@ -16,7 +16,8 @@ export class ImagesService {
     let img: Buffer;
 
     if (width > 0 && height > 0) {
-      img = await sharp(file).resize(+width, +height).toBuffer();
+      // img = await sharp(file).resize(+width, +height).toBuffer();
+      img = file;
     } else {
       img = file;
     }
@@ -32,7 +33,8 @@ export class ImagesService {
     let img: Buffer;
 
     if (width > 0 && height > 0) {
-      img = await sharp(file).resize(+width, +height).toBuffer();
+      // img = await sharp(file).resize(+width, +height).toBuffer();
+      img = file;
     } else {
       img = file;
     }
