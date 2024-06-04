@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Header,
   HttpStatus,
@@ -14,6 +15,7 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiBody, ApiConsumes } from "@nestjs/swagger";
+import { exec } from "child_process";
 import { ApiKeyGuard } from "../key.guard";
 import { ImagesService } from "./images.service";
 
@@ -99,5 +101,16 @@ export class ImagesController {
     file: Express.Multer.File
   ) {
     return await this.imagesService.createBackground(id, file);
+  }
+
+  @Delete("/cache")
+  invalidateCache() {
+    return exec("sh invalidate_nginx_cache.sh", (error, stdout) => {
+      console.log(stdout);
+
+      if (!error) {
+        return HttpStatus.OK;
+      }
+    });
   }
 }
