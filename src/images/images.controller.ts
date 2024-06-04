@@ -31,7 +31,7 @@ export class ImagesController {
   ) {
     const img = await this.imagesService.getCover(id, height, width);
 
-    res.setHeader("Content-Type", "image/jpeg");
+    res.setHeader("Content-Type", "image/webp");
     await res.end(img);
   }
 
@@ -45,7 +45,7 @@ export class ImagesController {
   ) {
     const img = await this.imagesService.getBackground(id, height, width);
 
-    res.setHeader("Content-Type", "image/jpeg");
+    res.setHeader("Content-Type", "image/webp");
     await res.end(img);
   }
 

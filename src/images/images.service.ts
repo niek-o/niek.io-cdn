@@ -11,7 +11,7 @@ export class ImagesService {
   async getCover(id: string, height: number, width: number) {
     const rootDir = process.cwd();
 
-    const file = readFileSync(join(rootDir, "images/cover", `${id}.jpg`));
+    const file = readFileSync(join(rootDir, "images/cover", `${id}.webp`));
 
     let img: Buffer;
 
@@ -27,7 +27,7 @@ export class ImagesService {
   async getBackground(id: string, height: number, width: number) {
     const rootDir = process.cwd();
 
-    const file = readFileSync(join(rootDir, "images/background", `${id}.jpg`));
+    const file = readFileSync(join(rootDir, "images/background", `${id}.webp`));
 
     let img: Buffer;
 
@@ -43,7 +43,9 @@ export class ImagesService {
   async createCover(id: string, file: Express.Multer.File) {
     const rootDir = process.cwd();
 
-    writeFileSync(join(rootDir, "images/cover", `${id}.jpg`), file.buffer);
+    const webpFile = await sharp(file.buffer).webp().toBuffer();
+
+    writeFileSync(join(rootDir, "images/cover", `${id}.webp`), webpFile);
 
     return HttpStatus.CREATED;
   }
@@ -56,7 +58,9 @@ export class ImagesService {
 
     const rootDir = process.cwd();
 
-    writeFileSync(join(rootDir, "images/background", `${id}.jpg`), file.buffer);
+    const webpFile = await sharp(file.buffer).webp().toBuffer();
+
+    writeFileSync(join(rootDir, "images/background", `${id}.webp`), webpFile);
 
     return HttpStatus.CREATED;
   }
