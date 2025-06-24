@@ -7,7 +7,7 @@ const ACCEPTED_FILE_TYPES = [".mp3", ".wav", ".flac"];
 
 @Injectable()
 export class AudioService {
-  constructor() {}
+  constructor() { }
 
   async getAudio(id: string) {
     const rootDir = process.cwd();
@@ -47,7 +47,7 @@ export class AudioService {
       writeStream.write(file.buffer);
       writeStream.end();
 
-      writeStream.on("close", resolve);
+      writeStream.on("close", () => resolve);
     });
   }
 }
