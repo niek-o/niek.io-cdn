@@ -42,12 +42,13 @@ export class AudioService {
   }
 
   async writeFile(filePath: string, file: Express.Multer.File) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const writeStream = createWriteStream(filePath);
-      writeStream.write(file.buffer);
-      writeStream.end();
 
-      writeStream.on("close", () => resolve);
+      writeStream.on("error", () => reject());
+      writeStream.on("finish", () => resolve(null));
+
+      writeStream.end(file.buffer);
     });
   }
 }
